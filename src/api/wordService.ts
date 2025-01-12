@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-const API_URL = 'https://api.api-ninjas.com/v1/randomword'
+export async function fetchWord(length?: number): Promise<string> {
+  let API_URL = `https://random-word-api.herokuapp.com/word`
+  if (length !== 0 && length !== undefined) API_URL += `?${length}`
+  const response = await axios.get(API_URL)
+  return 'test'.toUpperCase() //response.data[0].toUpperCase()
+}
 
-export const fetchWord = async (): Promise<string> => {
-  const apiKey = import.meta.env.VITE_RANDOM_WORD_API_KEY
-  const response = await axios.get(API_URL, {
-    headers: {
-      'X-Api-Key': apiKey,
-    },
-  })
-  return response.data.word[0]
+export async function fetchWordMeaning(word: string) {
+  const API_URL = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+  const response = await axios.get(API_URL)
+  return response.data[0].meanings[0].definitions[0].definition.toLowerCase()
 }
