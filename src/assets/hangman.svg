@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="250" viewBox="0 0 200 250">
+    <!-- Base -->
+    <line x1="20" y1="230" x2="180" y2="230" stroke="black" stroke-width="4"/>
+
+    <!-- Pole -->
+    <line x1="50" y1="230" x2="50" y2="50" stroke="black" stroke-width="4"/>
+
+    <!-- Top beam -->
+    <line x1="50" y1="50" x2="150" y2="50" stroke="black" stroke-width="4"/>
+
+
+    <line x1="50" y1="80" x2="80" y2="50" stroke="black" stroke-width="4"/>
+    <!-- Rope -->
+    <line x1="150" y1="50" x2="150" y2="80" stroke="black" stroke-width="3"/>
+
+    <!-- Placeholder for the head -->
+    <circle cx="150" cy="100" r="20" stroke="black" stroke-width="3" fill="none"/>
+
+    <g class="stick-man">
+        <!-- Placeholder for the body -->
+        <line x1="150" y1="120" x2="150" y2="170" stroke="black" stroke-width="3"/>
+
+        <!-- Placeholder for left arm -->
+        <line x1="150" y1="130" x2="130" y2="150" stroke="black" stroke-width="3"/>
+
+        <!-- Placeholder for right arm -->
+        <line x1="150" y1="130" x2="170" y2="150" stroke="black" stroke-width="3"/>
+
+        <!-- Placeholder for left leg -->
+        <line x1="150" y1="170" x2="130" y2="200" stroke="black" stroke-width="3"/>
+
+        <!-- Placeholder for right leg -->
+        <line x1="150" y1="170" x2="170" y2="200" stroke="black" stroke-width="3"/>
+    </g>
+</svg>
