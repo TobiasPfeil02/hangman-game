@@ -14,7 +14,7 @@ const time = ref(props.initialTime)
 })
 <template>
   <div class="timer">
-    <p>{{ formattedTime }}</p>
+    <p>{{ time }}</p>
   </div>
 </template>
 
