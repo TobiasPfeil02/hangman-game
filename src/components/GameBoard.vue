@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {Button} from '@/components/ui/button'
 import { fetchWord, fetchWordMeaning } from '@/api/wordService.ts'
 import { onMounted, ref } from 'vue'
 import KeyBoard from '@/components/KeyBoard.vue'
@@ -34,8 +35,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="game-board">
-    <div class="hangman">
+  <div class="h-full flex flex-col justify-center items-center gap-4">
+    <div class="w-full h-[50vh]">
   <Hangman />
     </div>
   <div v-if="containsAllChars(game.correctLetters, game.word)">
@@ -46,42 +47,25 @@ onMounted(() => {
     </p>
     <button class="btn-primary" @click="resetGame()">Try Again</button>
   </div>
-  <div v-else-if="game.wrongAttempts < game.maxAttempts">
-
+  <div v-else-if="game.wrongAttempts < game.maxAttempts" class="flex flex-col justify-center items-center gap-4">
     <h1 v-if="word">
-      <span v-for="(char, index) in word.split('')" v-bind:key="char + index">{{
+      <span v-for="(char, index) in word.split('')" v-bind:key="char + index" class="text-4xl">{{
           game.correctLetters.includes(char) ? char : '_ '
         }}</span>
     </h1>
     <KeyBoard />
   </div>
 
-  <div v-else>
-    <h2>Game Over</h2>
-    <p>The word we were looking for was: {{ game.word }}</p>
-    <p v-if="game.wordMeaning !== 'Lacking a definition or value.'">
+  <div v-else class="text-center flex flex-col justify-center items-center gap-2">
+    <h2 class="text-2xl">Game Over</h2>
+    <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
+    <p v-if="game.wordMeaning !== 'Lacking a definition or value.'" class="text-lg">
       {{ game.word }} means {{ game.wordMeaning }}
     </p>
-    <button class="btn-primary" @click="resetGame()">Try Again</button>
+    <Button class="btn-primary" @click="resetGame()">Try Again</Button>
   </div>
   </div>
 </template>
 
 <style scoped>
-div{
-  display: flex;
-  flex-direction: column;
-}
-.game-board{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.hangman{
-  width: 100%;
-  height: 50vh;
-}
 </style>
