@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import {Button} from "@/components/ui/button"
 const props = defineProps<{
   state: 'default' | 'success' | 'error'
 }>()
 </script>
 <template>
-  <button :class="`btn-${props.state}`">
+  <Button :class="`btn-${props.state}`">
     <slot />
-  </button>
+  </Button>
 </template>
 
 <style scoped>

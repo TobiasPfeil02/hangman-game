@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {Button} from "@/components/ui/button"
+</script>
 
 <template>
   <div class="home-screen">
@@ -9,9 +11,9 @@
 
     <div class="main-content">
       <nav class="nav-buttons">
-        <router-link to="/game" class="btn btn-primary">Start Game</router-link>
-        <router-link to="/settings" class="btn btn-secondary">Settings</router-link>
-        <router-link to="/scoreboard" class="btn btn-secondary">Scoreboard</router-link>
+        <Button><router-link to="/game" class="btn btn-primary">Start Game</router-link></Button>
+        <Button><router-link to="/settings" class="btn btn-secondary">Settings</router-link></Button>
+        <Button><router-link to="/scoreboard" class="btn btn-secondary">Scoreboard</router-link></Button>
       </nav>
     </div>
 
@@ -24,9 +26,12 @@
 <style scoped>
 .home-screen {
   height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header {
