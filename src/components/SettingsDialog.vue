@@ -27,10 +27,9 @@ const game = useGameStore()
             v-for="difficulty in Object.values(Difficulty)"
             :key="difficulty"
             variant="outline"
-            class="mr-2 hover:border-emerald-700"
+            class="mr-2 font-semibold hover:border-green-700"
             :class="{
-              'border-emerald-700 bg-emerald-700 hover:bg-emerald-700':
-                game.difficulty == difficulty,
+              'text-white hover:text-white  border-green-700 bg-green-700 hover:bg-green-700': game.difficulty == difficulty,
             }"
             @click="game.setDifficulty(difficulty)"
           >
