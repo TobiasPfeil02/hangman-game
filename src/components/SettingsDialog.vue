@@ -20,14 +20,17 @@ const game = useGameStore()
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Settings</DialogTitle>
+        <DialogTitle class="mb-2 font-bold">Settings</DialogTitle>
+        <h4>Select Difficulty:</h4>
         <div>
           <Button
             v-for="difficulty in Object.values(Difficulty)"
             :key="difficulty"
+            variant="outline"
+            class="mr-2 hover:border-emerald-700"
             :class="{
-              'btn-active': game.difficulty === difficulty,
-              'btn-primary': game.difficulty !== difficulty,
+              'border-emerald-700 bg-emerald-700 hover:bg-emerald-700':
+                game.difficulty == difficulty,
             }"
             @click="game.setDifficulty(difficulty)"
           >
@@ -39,29 +42,4 @@ const game = useGameStore()
   </Dialog>
 </template>
 
-<style scoped>
-.btn-primary {
-  background-color: gray;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: darkgray;
-}
-
-/* Aktiver Button-Stil */
-.btn-active {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-</style>
+<style scoped></style>
