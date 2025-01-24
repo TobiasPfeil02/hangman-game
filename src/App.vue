@@ -3,11 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-  </header>
-
-  <RouterView />
+  <div class="h-full max-w-screen-xl mx-auto p-2">
+    <RouterView />
+  </div>
 </template>
-
-<style scoped>
-</style>
