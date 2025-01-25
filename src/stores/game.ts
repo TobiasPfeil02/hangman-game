@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { Difficulty } from '@/types/difficulty.enum.ts'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
@@ -10,6 +11,7 @@ export const useGameStore = defineStore('game', {
     maxAttempts: 6,
     timer: 30,
     wordLength: 0,
+    difficulty: 'easy' as Difficulty,
   }),
   actions: {
     setWord(newWord: string) {
@@ -23,6 +25,10 @@ export const useGameStore = defineStore('game', {
     },
     setTimer(newTimer: number) {
       this.timer = newTimer
+    },
+    setDifficulty(newDifficulty: Difficulty) {
+      this.difficulty = newDifficulty
+      console.log(this.difficulty)
     },
     guessLetter(letter: string) {
       letter = letter.toUpperCase()
