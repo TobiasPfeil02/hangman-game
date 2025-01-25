@@ -17,13 +17,14 @@ function initWord() {
     word.value = res
     game.setWord(word.value)
     game.startTimer()
-  })
-  fetchWordMeaning(word.value).then((res) => {
-    game.setWordMeaning(res)
+    fetchWordMeaning(word.value).then((res) => {
+      game.setWordMeaning(res)
+    })
   })
 }
 
 function resetGame() {
+  console.log("resetting game")
   game.resetGame()
   initWord()
 }
