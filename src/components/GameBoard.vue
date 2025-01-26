@@ -25,7 +25,7 @@ function initWord() {
 }
 
 function resetGame() {
-  console.log("resetting game")
+  console.log('resetting game')
   game.resetGame()
   initWord()
 }
@@ -52,23 +52,42 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col gap-24">
+  <div class="h-full flex flex-col items-center">
     <NavBar class="w-full shadow-md bg-white"/>
-    <div class="flex flex-col justify-center items-center gap-4">
-      <TimerCard :initial-time="game.timer" />
-      <div class="w-full h-[50vh]">
-        <Hangman />
+    <TimerCard :initial-time="game.timer" />
+    <div class="h-[40vh] mt-4">
+      <Hangman />
+    </div>
+    <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
+      <h1 v-if="word">
+        <span v-for="(char, index) in word.split('')" v-bind:key="char + index" class="text-4xl">{{
+          game.correctLetters.includes(char) ? char : '_ '
+        }}</span>
+      </h1>
+      <KeyBoard />
+    </div>
+    <div v-else class="mt-4">
+      <div
+        v-if="containsAllChars(game.correctLetters, game.word)"
+        class="flex flex-col justify-center items-center gap-2"
+      >
+        <h2 class="text-2xl">Success</h2>
+        <p class="text-lg">You guessed the correct word: {{ game.word }} !</p>
+        <p v-if="game.wordMeaning !== 'Lacking a definition or value.'">
+          {{ game.word }} means {{ game.wordMeaning }}
+        </p>
+        <Button class="btn-primary" @click="resetGame()">Try Again</Button>
       </div>
-      <div v-if="!game.gameOver" class="flex flex-col justify-center items-center gap-4">
-        <h1 v-if="word">
-          <span
-            v-for="(char, index) in word.split('')"
-            v-bind:key="char + index"
-            class="text-4xl"
-            >{{ game.correctLetters.includes(char) ? char : '_ ' }}</span
-          >
-        </h1>
-        <KeyBoard />
+      <div
+        v-else-if="game.wrongAttempts >= game.maxAttempts"
+        class="text-center flex flex-col justify-center items-center gap-2"
+      >
+        <h2 class="text-2xl">Game Over</h2>
+        <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
+        <p v-if="game.wordMeaning !== 'Lacking a definition or value.'" class="text-lg">
+          {{ game.word }} means {{ game.wordMeaning }}
+        </p>
+        <Button class="btn-primary" @click="resetGame()">Try Again</Button>
       </div>
       <div v-else>
         <div
@@ -104,5 +123,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style scoped></style>
