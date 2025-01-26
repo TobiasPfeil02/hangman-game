@@ -53,8 +53,8 @@ onMounted(() => {
 
 <template>
   <div class="h-full flex flex-col items-center">
-    <NavBar class="w-full shadow-md bg-white"/>
-    <TimerCard :initial-time="game.timer" />
+    <NavBar class="w-full absolute shadow-md bg-white"/>
+    <TimerCard :initial-time="game.timer" class="mt-20" />
     <div class="h-[40vh] mt-4">
       <Hangman />
     </div>
