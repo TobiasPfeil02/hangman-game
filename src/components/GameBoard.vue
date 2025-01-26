@@ -65,7 +65,7 @@ onMounted(() => {
         <span
           v-for="(char, index) in word.split('')"
           v-bind:key="char + index"
-          class="text-4xl w-9"
+          class="text-4xl w-9 text-center"
           >{{ game.correctLetters.includes(char) ? char : '_' }}</span
         >
       </h1>
