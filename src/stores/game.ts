@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { Difficulty } from '@/types/difficulty.enum.ts'
 import { containsAllChars, switchDifficulty } from '@/lib/utils.ts'
+import type { Score } from '@/types/score.ts'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
@@ -11,10 +12,12 @@ export const useGameStore = defineStore('game', {
     wrongAttempts: 0,
     maxAttempts: 6,
     timer: 30,
+    currentTimeTaken: 0,
     wordLength: 0,
     difficulty: 'easy' as Difficulty,
     isRunning: false,
     gameOver: false,
+    topScores: [] as Score[],
   }),
   actions: {
     setWord(newWord: string) {
@@ -31,6 +34,7 @@ export const useGameStore = defineStore('game', {
     },
     startTimer() {
       this.isRunning = true
+      this.currentTimeTaken = 0
     },
     pauseTimer() {
       this.isRunning = false
@@ -69,6 +73,13 @@ export const useGameStore = defineStore('game', {
       this.wrongAttempts = 0
       this.gameOver = false
       this.isRunning = false
+    },
+    addScore(score: Score) {
+      this.topScores.push(score)
+      this.topScores.sort((a, b) => a.timeTaken - b.timeTaken)
+      if (this.topScores.length > 10) {
+        this.topScores.pop()
+      }
     },
   },
 })

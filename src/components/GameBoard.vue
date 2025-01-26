@@ -8,6 +8,7 @@ import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import NavBar from '@/components/NavBar.vue'
+import { g } from 'vitest/dist/chunks/suite.B2jumIFP.js'
 
 const word = ref()
 const game = useGameStore()
@@ -27,6 +28,23 @@ function resetGame() {
   console.log("resetting game")
   game.resetGame()
   initWord()
+}
+
+function guessedWordCorrectly(array: string[], str: string) {
+  if (containsAllChars(array, str)) {
+    game.addScore({
+      word: game.word,
+      meaning: game.wordMeaning,
+      timeTaken: game.currentTimeTaken,
+    })
+
+    console.log(array, str);
+
+    return true
+  } else {
+    return false
+  }
+
 }
 
 onMounted(() => {
@@ -55,7 +73,7 @@ onMounted(() => {
       </div>
       <div v-else>
         <div
-          v-if="containsAllChars(game.correctLetters, game.word)"
+          v-if="guessedWordCorrectly(game.correctLetters, word)"
           class="flex flex-col justify-center items-center gap-2"
         >
           <h2 class="text-2xl">Success</h2>

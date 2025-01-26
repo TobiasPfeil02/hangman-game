@@ -37,6 +37,7 @@ const startTimer = () => {
 
 const pauseTimer = () => {
   gameStore.pauseTimer()
+  gameStore.currentTimeTaken = props.initialTime - time.value
   if (timerInterval.value !== null) {
     clearInterval(timerInterval.value)
     timerInterval.value = null
