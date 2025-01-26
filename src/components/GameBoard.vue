@@ -7,7 +7,6 @@ import { useGameStore } from '@/stores/game.ts'
 import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
-import NavBar from '@/components/NavBar.vue'
 import type { Score } from '@/types/score'
 
 const word = ref()
@@ -43,7 +42,6 @@ function guessedWordCorrectly(array: string[], str: string) {
   } else {
     return false
   }
-
 }
 
 onMounted(() => {
@@ -52,23 +50,28 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col items-center">
-    <NavBar class="w-full absolute shadow-md bg-white"/>
+  <div class="h-full flex flex-col justify-start">
     <div class="relative">
       <TimerCard :initial-time="game.timer" class="absolute top-4 left-1/2 translate-x-[-50%]" />
       <div class="h-[40vh] mt-4">
         <Hangman />
       </div>
     </div>
-    <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
-      <h1 v-if="word">
-        <span v-for="(char, index) in word.split('')" v-bind:key="char + index" class="text-4xl">{{
-          game.correctLetters.includes(char) ? char : '_ '
-        }}</span>
+    <div
+      v-if="!game.gameOver"
+      class="w-full flex flex-col justify-center items-center gap-10 mt-[5vh]"
+    >
+      <h1 v-if="word" class="flex gap-0.5">
+        <span
+          v-for="(char, index) in word.split('')"
+          v-bind:key="char + index"
+          class="text-4xl w-9"
+          >{{ game.correctLetters.includes(char) ? char : '_' }}</span
+        >
       </h1>
       <KeyBoard />
     </div>
-    <div v-else class="mt-4">
+    <div v-else class="mt-8">
       <div
         v-if="guessedWordCorrectly(game.correctLetters, game.word)"
         class="flex flex-col justify-center items-center gap-2"
