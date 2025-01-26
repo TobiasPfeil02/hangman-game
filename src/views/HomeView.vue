@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import {Button} from "@/components/ui/button"
 import SettingsDialog from '@/components/SettingsDialog.vue'
+import hangman from "@/assets/hangman.svg"
 </script>
 
 <template>
-  <div class="h-full py-2 flex flex-col justify-between items-center mx-auto">
+  <div class="h-full p-2 flex flex-col justify-between items-center mx-auto bg-cover bg-center"
+        :style='{backgroundImage: `url("${hangman}")`}'>
     <header class="mt-4">
       <h1 class="text-center font-bold text-4xl mb-2">Hangman Challenge</h1>
       <p class="text-[#34495e]">Can you guess the word before time runs out?</p>
