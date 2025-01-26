@@ -12,7 +12,7 @@ export const useGameStore = defineStore('game', {
     wrongAttempts: 0,
     maxAttempts: 6,
     timer: 30,
-    currentTimeTaken: 0,
+    remainingTime: 30,
     wordLength: 0,
     difficulty: 'easy' as Difficulty,
     isRunning: false,
@@ -31,10 +31,10 @@ export const useGameStore = defineStore('game', {
     },
     setTimer(newTimer: number) {
       this.timer = newTimer
+      this.remainingTime = newTimer
     },
     startTimer() {
       this.isRunning = true
-      this.currentTimeTaken = 0
     },
     pauseTimer() {
       this.isRunning = false
@@ -73,6 +73,7 @@ export const useGameStore = defineStore('game', {
       this.wrongAttempts = 0
       this.gameOver = false
       this.isRunning = false
+      this.remainingTime = this.timer
     },
     addScore(score: Score) {
       this.topScores.push(score)

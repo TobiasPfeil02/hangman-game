@@ -35,10 +35,8 @@ function guessedWordCorrectly(array: string[], str: string) {
     game.addScore({
       word: game.word,
       meaning: game.wordMeaning,
-      timeTaken: game.currentTimeTaken,
+      timeTaken: game.timer - game.remainingTime,
     })
-
-    console.log(array, str);
 
     return true
   } else {
@@ -48,7 +46,7 @@ function guessedWordCorrectly(array: string[], str: string) {
 }
 
 onMounted(() => {
-  initWord()
+  resetGame()
 })
 </script>
 

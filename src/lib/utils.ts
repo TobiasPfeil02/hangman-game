@@ -25,6 +25,7 @@ export function switchDifficulty(difficulty: Difficulty){
   }
 }
 export function containsAllChars(array: string[], str: string) {
+  if (!str || str.length === 0) return false
   const uniqueChars = new Set(str)
   return Array.from(uniqueChars).every((char) => array.includes(char))
 }
