@@ -8,7 +8,6 @@ import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import NavBar from '@/components/NavBar.vue'
-import { g } from 'vitest/dist/chunks/suite.B2jumIFP.js'
 import type { Score } from '@/types/score'
 
 const word = ref()
