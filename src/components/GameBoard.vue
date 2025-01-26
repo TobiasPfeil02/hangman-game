@@ -64,7 +64,7 @@ onMounted(() => {
           game.correctLetters.includes(char) ? char : '_ '
         }}</span>
       </h1>
-      <KeyBoard />
+      <KeyBoard class="max-w-full"/>
     </div>
     <div v-else class="mt-4">
       <div
