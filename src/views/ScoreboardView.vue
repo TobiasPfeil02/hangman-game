@@ -1,3 +1,30 @@
+
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import NavBar from '@/components/NavBar.vue';
+import ScoreCard from '@/components/ScoreCard.vue';
+import { useGameStore } from '@/stores/game';
+
+const selectedDifficulty = ref('all'); // Default filter is 'all'
+const gameStore = useGameStore();
+
+const topScores = computed(() => gameStore.topScores);
+
+const filteredScores = computed(() => {
+  if (selectedDifficulty.value === 'all') {
+    return topScores.value;
+  }
+  return topScores.value.filter(
+    (score: { difficulty: string }) => score.difficulty.toLowerCase() === selectedDifficulty.value
+  );
+});
+
+function filterScores(difficulty: string) {
+  selectedDifficulty.value = difficulty;
+}
+</script>
+
 <template>
   <div class="bg-gray-100 min-h-screen flex flex-col items-center">
     <!-- NavBar -->
@@ -39,7 +66,7 @@
         </button>
       </div>
 
-      <!-- Dynamic Scoreboard -->
+      <!-- Scoreboard -->
       <div v-if="filteredScores.length" class="space-y-4">
         <ScoreCard
           v-for="(attempt, index) in filteredScores"
@@ -57,44 +84,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import NavBar from '@/components/NavBar.vue';
-import ScoreCard from '@/components/ScoreCard.vue';
-import { useGameStore } from '@/stores/game';
-
-export default {
-  name: 'ScoreboardView',
-  components: {
-    NavBar,
-    ScoreCard,
-  },
-  data() {
-    return {
-      selectedDifficulty: 'all', // Default filter is 'all'
-    };
-  },
-  computed: {
-    topScores() {
-      const gameStore = useGameStore();
-      return gameStore.topScores;
-    },
-    filteredScores() {
-      if (this.selectedDifficulty === 'all') {
-        return this.topScores;
-      }
-      return this.topScores.filter(
-        (score) => score.difficulty.toLowerCase() === this.selectedDifficulty
-      );
-    },
-  },
-  methods: {
-    filterScores(difficulty) {
-      this.selectedDifficulty = difficulty;
-    },
-  },
-};
-</script>
 
 <style scoped>
 </style>
