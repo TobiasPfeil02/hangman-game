@@ -12,6 +12,9 @@
     <div class="flex items-center">
       <span class="font-bold mr-1">Time Taken:</span> <span>{{ timeTaken }}</span>
     </div>
+    <div class="flex items-center">
+      <span class="font-bold mr-1">Difficulty:</span> <span>{{ difficulty }}</span>
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,10 @@ export default {
       required: true,
     },
     timeTaken: {
+      type: String,
+      required: true,
+    },
+    difficulty: {
       type: String,
       required: true,
     },

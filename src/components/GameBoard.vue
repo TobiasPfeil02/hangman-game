@@ -9,6 +9,7 @@ import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import NavBar from '@/components/NavBar.vue'
 import { g } from 'vitest/dist/chunks/suite.B2jumIFP.js'
+import type { Score } from '@/types/score'
 
 const word = ref()
 const game = useGameStore()
@@ -36,7 +37,8 @@ function guessedWordCorrectly(array: string[], str: string) {
       word: game.word,
       meaning: game.wordMeaning,
       timeTaken: game.timer - game.remainingTime,
-    })
+      difficulty: game.difficulty,
+    } as Score)
 
     return true
   } else {
@@ -52,7 +54,7 @@ onMounted(() => {
 
 <template>
   <div class="h-full flex flex-col gap-24">
-    <NavBar />
+    <NavBar class="w-full shadow-md bg-white"/>
     <div class="flex flex-col justify-center items-center gap-4">
       <TimerCard :initial-time="game.timer" />
       <div class="w-full h-[50vh]">
