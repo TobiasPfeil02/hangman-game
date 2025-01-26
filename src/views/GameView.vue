@@ -4,6 +4,6 @@ import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
-  <NavBar class="w-full shadow-md bg-white" />
+  <NavBar class="w-full shadow-md bg-white z-10 relative" />
   <GameBoard />
 </template>
