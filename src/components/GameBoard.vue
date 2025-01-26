@@ -37,9 +37,11 @@ onMounted(() => {
 <template>
   <div class="h-full flex flex-col items-center">
     <NavBar />
-    <TimerCard :initial-time="game.timer" />
-    <div class="h-[40vh] mt-4">
-      <Hangman />
+    <div class="relative">
+      <TimerCard :initial-time="game.timer" class="absolute top-4 left-1/2 translate-x-[-50%]" />
+      <div class="h-[40vh] mt-4">
+        <Hangman />
+      </div>
     </div>
     <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
       <h1 v-if="word">
