@@ -76,9 +76,9 @@ watch(
 </script>
 
 <template>
-  <div class="mx-auto my-0 w-1/5 h-16">
+  <div class="py-2 px-4">
     <Badge
-      class="w-full h-full text-center text-2xl justify-center"
+      class="text-2xl"
       :variant="time > 10 ? 'default' : 'destructive'"
     >
       {{ formattedTime }}
