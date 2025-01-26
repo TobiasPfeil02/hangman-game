@@ -8,6 +8,7 @@ import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import NavBar from '@/components/NavBar.vue'
+import type { Score } from '@/types/score'
 
 const word = ref()
 const game = useGameStore()
@@ -29,14 +30,30 @@ function resetGame() {
   initWord()
 }
 
+function guessedWordCorrectly(array: string[], str: string) {
+  if (containsAllChars(array, str)) {
+    game.addScore({
+      word: game.word,
+      meaning: game.wordMeaning,
+      timeTaken: game.timer - game.remainingTime,
+      difficulty: game.difficulty,
+    } as Score)
+
+    return true
+  } else {
+    return false
+  }
+
+}
+
 onMounted(() => {
-  initWord()
+  resetGame()
 })
 </script>
 
 <template>
   <div class="h-full flex flex-col items-center">
-    <NavBar />
+    <NavBar class="w-full absolute shadow-md bg-white"/>
     <div class="relative">
       <TimerCard :initial-time="game.timer" class="absolute top-4 left-1/2 translate-x-[-50%]" />
       <div class="h-[40vh] mt-4">
@@ -53,7 +70,7 @@ onMounted(() => {
     </div>
     <div v-else class="mt-4">
       <div
-        v-if="containsAllChars(game.correctLetters, game.word)"
+        v-if="guessedWordCorrectly(game.correctLetters, game.word)"
         class="flex flex-col justify-center items-center gap-2"
       >
         <h2 class="text-2xl">Success</h2>
