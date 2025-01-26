@@ -68,7 +68,7 @@ onMounted(() => {
     </div>
     <div v-else class="mt-4">
       <div
-        v-if="containsAllChars(game.correctLetters, game.word)"
+        v-if="guessedWordCorrectly(game.correctLetters, game.word)"
         class="flex flex-col justify-center items-center gap-2"
       >
         <h2 class="text-2xl">Success</h2>
