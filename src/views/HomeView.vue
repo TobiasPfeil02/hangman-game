@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {Button} from "@/components/ui/button"
+import SettingsDialog from '@/components/SettingsDialog.vue'
 </script>
 
 <template>
@@ -13,9 +14,7 @@ import {Button} from "@/components/ui/button"
       <Button>
         <router-link to="/game" class="btn btn-primary">Start Game</router-link>
       </Button>
-      <Button>
-        <router-link to="/settings" class="btn btn-secondary">Settings</router-link>
-      </Button>
+      <SettingsDialog/>
       <Button>
         <router-link to="/scoreboard" class="btn btn-secondary">Scoreboard</router-link>
       </Button>
