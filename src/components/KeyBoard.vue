@@ -25,7 +25,7 @@ function handleKeyPress(key: string) {
         v-for="key in row"
         :key="key"
         @click="handleKeyPress(key)"
-        class="w-[5%] max-w-[4rem] h-12 font-semibold"
+        class="w-[8%] max-w-[4rem] h-12 font-semibold"
         :state="
           game.correctLetters.includes(key)
             ? 'success'
