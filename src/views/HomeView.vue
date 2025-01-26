@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
+import {Button} from "@/components/ui/button"
 </script>
 
 <template>
@@ -21,7 +21,7 @@ import { Button } from '@/components/ui/button'
       </Button>
     </nav>
 
-    <footer class="p-4 text-[0.9em] text-gray-300 bg-gray-700 rounded-md">
+    <footer class="p-4 text-[0.9em] text-gray-400 bg-gray-700 rounded-md">
       <p>Tip: Use jokers to reveal letters or remove wrong options!</p>
     </footer>
   </div>
