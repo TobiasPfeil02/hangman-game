@@ -15,13 +15,17 @@ function handleKeyPress(key: string) {
 </script>
 
 <template>
-  <div class="keyboard-wrapper">
-    <div v-for="(row, rowIndex) in qwertyKeyboard" :key="rowIndex" class="keyboard-row">
+  <div class="keyboard-flex keyboard-wrapper w-full">
+    <div
+      v-for="(row, rowIndex) in qwertyKeyboard"
+      :key="rowIndex"
+      class="keyboard-flex keyboard-row w-full"
+    >
       <KeyButton
         v-for="key in row"
         :key="key"
         @click="handleKeyPress(key)"
-        class="keyboard-key"
+        class="w-[8%] max-w-[4rem] h-12 font-semibold"
         :state="
           game.correctLetters.includes(key)
             ? 'success'
@@ -37,16 +41,17 @@ function handleKeyPress(key: string) {
 </template>
 
 <style scoped>
-.keyboard-wrapper {
+.keyboard-flex {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
 }
 
+.keyboard-wrapper {
+  flex-direction: column;
+}
+
 .keyboard-row {
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 }
 </style>
