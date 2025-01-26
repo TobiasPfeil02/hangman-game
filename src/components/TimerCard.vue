@@ -27,6 +27,7 @@ const startTimer = () => {
     timerInterval.value = window.setInterval(() => {
       if (time.value > 0) {
         time.value--
+        gameStore.remainingTime = time.value
       } else {
         gameStore.triggerGameOver()
         resetTimer()
