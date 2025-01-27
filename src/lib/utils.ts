@@ -13,14 +13,20 @@ export function switchDifficulty(difficulty: Difficulty){
     case "hard":
       game.timer = 20
       game.wordLength = 12
+      game.jokerAmount1 = 0
+      game.jokerAmount2 = 0
       break
     case "medium":
       game.timer = 30
       game.wordLength = 8
+      game.jokerAmount1 = 1
+      game.jokerAmount2 = 3
       break
     case "easy":
       game.timer = 40
       game.wordLength = 5
+      game.jokerAmount1 = 2
+      game.jokerAmount2 = 4
       break
   }
 }

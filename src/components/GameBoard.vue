@@ -9,6 +9,7 @@ import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import NavBar from '@/components/NavBar.vue'
 import type { Score } from '@/types/score'
+import JokerButton from '@/components/JokerButton.vue'
 
 const word = ref()
 const game = useGameStore()
@@ -52,10 +53,14 @@ onMounted(() => {
 
 <template>
   <div class="h-full flex flex-col items-center">
-    <NavBar class="w-full absolute"/>
+    <NavBar class="w-full absolute" />
     <TimerCard :initial-time="game.timer" class="mt-20" />
-    <div class="h-[40vh] mt-4">
+    <div class="h-[40vh] mt-4 flex items-center">
       <Hangman />
+      <div class="flex flex-col gap-4">
+        <JokerButton type="hint" :amount="game.jokerAmount1" />
+        <JokerButton type="removeLetter" :amount="game.jokerAmount2" />
+      </div>
     </div>
     <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
       <h1 v-if="word">
@@ -63,7 +68,7 @@ onMounted(() => {
           game.correctLetters.includes(char) ? char : '_ '
         }}</span>
       </h1>
-      <KeyBoard class="max-w-full"/>
+      <KeyBoard class="max-w-full" />
     </div>
     <div v-else class="mt-4">
       <div
@@ -88,10 +93,7 @@ onMounted(() => {
         </p>
         <Button class="btn-primary" @click="resetGame()">Try Again</Button>
       </div>
-      <div
-        v-else
-        class="text-center flex flex-col justify-center items-center gap-2"
-      >
+      <div v-else class="text-center flex flex-col justify-center items-center gap-2">
         <h2 class="text-2xl">Game Over</h2>
         <p class="text-lg">You ran out of time!</p>
         <p class="text-lg">The word we were looking for was: {{ game.word }}</p>

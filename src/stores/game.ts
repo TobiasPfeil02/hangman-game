@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia'
 import type { Difficulty } from '@/types/difficulty.enum.ts'
-import { containsAllChars, loadFromLocalStorage, saveToLocalStorage, switchDifficulty } from '@/lib/utils.ts'
+import {
+  containsAllChars,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  switchDifficulty,
+} from '@/lib/utils.ts'
 import type { Score } from '@/types/score.ts'
 
 export const useGameStore = defineStore('game', {
@@ -14,6 +19,8 @@ export const useGameStore = defineStore('game', {
     timer: 30,
     remainingTime: 30,
     wordLength: 0,
+    jokerAmount1: 2,
+    jokerAmount2: 2,
     difficulty: 'easy' as Difficulty,
     isRunning: false,
     gameOver: false,
@@ -76,6 +83,7 @@ export const useGameStore = defineStore('game', {
       this.isRunning = false
       this.remainingTime = this.timer
       this.addedCurrentScore = false
+      switchDifficulty(this.difficulty)
     },
     addScore(score: Score) {
       if (this.addedCurrentScore) return

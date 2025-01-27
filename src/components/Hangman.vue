@@ -5,7 +5,7 @@ const game = useGameStore()
 </script>
 
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 200 250" style="width: 100%; height: 100%">
+  <svg xmlns="http://www.w3.org/2000/svg" width="200" height="250" viewBox="0 0 200 250" style="width: 100%; height: 100%">
     <rect width="200" height="250" fill="#96bbda" x="0" y="0"/>
     <rect width="200" height="100" fill="#81af56" x="0" y="230"/>
     <circle r="40" cy="230" cx="40" fill="#81af56"/>
