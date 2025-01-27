@@ -58,8 +58,8 @@ onMounted(() => {
     <div class="h-[40vh] mt-4 flex items-center">
       <Hangman />
       <div class="flex flex-col gap-4">
-        <JokerButton type="hint" :amount="game.jokerAmount1" />
-        <JokerButton type="removeLetter" :amount="game.jokerAmount2" />
+        <JokerButton type="hint" :amount="game.jokerHint" />
+        <JokerButton type="removeLetter" :amount="game.jokerRemoveLetter" />
       </div>
     </div>
     <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
