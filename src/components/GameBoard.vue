@@ -52,10 +52,10 @@ onMounted(() => {
 
 <template>
   <div class="relative">
-    <TimerCard :initial-time="game.timer" class="absolute top-6 left-1/2 translate-x-[-50%]" />
-    <div class="h-[40vh] xl:h-[50vh] mt-4 flex items-center">
+    <TimerCard :initial-time="game.timer" class="absolute left-1/2 translate-x-[-50%]" />
+    <div class="h-[40vh] xl:h-[50vh] flex items-center">
       <Hangman />
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 absolute right-5">
         <JokerButton type="hint" :amount="game.jokerHint" />
         <JokerButton type="removeLetter" :amount="game.jokerRemoveLetter" />
       </div>
