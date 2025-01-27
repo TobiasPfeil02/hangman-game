@@ -20,28 +20,25 @@ defineProps({
     type: String,
     required: true,
   },
-});
+})
 </script>
 
 <template>
-  <div class="score-card flex items-center gap-4 p-4 border border-gray-300 rounded-lg shadow-md  mx-auto">
-    <div class="flex items-center">
-      <span class="font-bold mr-1">#</span> <span>{{ position }}</span>
-    </div>
-    <div class="flex items-center">
-      <span class="font-bold mr-1">Word:</span> <span>{{ word }}</span>
-    </div>
-    <div class="flex items-center">
-      <span class="font-bold mr-1">Meaning:</span> <span>{{ meaning }}</span>
-    </div>
-    <div class="flex items-center">
-      <span class="font-bold mr-1">Time Taken:</span> <span>{{ timeTaken }}</span>
-    </div>
-    <div class="flex items-center">
-      <span class="font-bold mr-1">Difficulty:</span> <span>{{ difficulty }}</span>
+  <div
+    class="score-card flex flex-col lg:flex-row items-center gap-1 lg:gap-4 p-4 border border-gray-300 rounded-lg shadow-md mx-auto"
+  >
+    <div
+      v-for="(value, label) in {
+        '#': position,
+        'Word': word,
+        'Meaning': meaning,
+        'Time Taken': timeTaken,
+        'Difficulty': difficulty,
+      }"
+      :key="label"
+    >
+      <span class="font-bold mr-1">{{ label }}:</span>
+      <span>{{ value }}</span>
     </div>
   </div>
 </template>
-
-<style scoped>
-</style>
