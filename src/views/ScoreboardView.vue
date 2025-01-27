@@ -67,7 +67,7 @@ function filterScores(difficulty: string) {
       </div>
 
       <!-- Scoreboard -->
-      <div v-if="filteredScores.length" class="space-y-4">
+      <div v-if="filteredScores?.length" class="space-y-4">
         <ScoreCard
           v-for="(attempt, index) in filteredScores"
           :key="index"

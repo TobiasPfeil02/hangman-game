@@ -29,3 +29,12 @@ export function containsAllChars(array: string[], str: string) {
   const uniqueChars = new Set(str)
   return Array.from(uniqueChars).every((char) => array.includes(char))
 }
+
+export function saveToLocalStorage(key: string, value: any) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+export function loadFromLocalStorage(key: string) {
+  const saved = localStorage.getItem(key)
+  return saved ? JSON.parse(saved) : null
+}
