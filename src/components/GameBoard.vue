@@ -8,6 +8,7 @@ import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
 import type { Score } from '@/types/score'
+import JokerButton from '@/components/JokerButton.vue'
 
 const word = ref()
 const game = useGameStore()
@@ -52,8 +53,12 @@ onMounted(() => {
 <template>
   <div class="relative">
     <TimerCard :initial-time="game.timer" class="absolute top-6 left-1/2 translate-x-[-50%]" />
-    <div class="h-[40vh] xl:h-[50vh]">
+    <div class="h-[40vh] xl:h-[50vh] mt-4 flex items-center">
       <Hangman />
+      <div class="flex flex-col gap-4">
+        <JokerButton type="hint" :amount="game.jokerHint" />
+        <JokerButton type="removeLetter" :amount="game.jokerRemoveLetter" />
+      </div>
     </div>
   </div>
   <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10 mt-4">
