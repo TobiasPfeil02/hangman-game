@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import KeyButton from '@/components/KeyButton.vue'
+import { QWERTY as qwertyKeyboard } from '@/lib/constants.ts'
 import { useGameStore } from '@/stores/game.ts'
 
 const game = useGameStore()
-const qwertyKeyboard = [
-  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-  ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-]
+
 
 function handleKeyPress(key: string) {
   game.guessLetter(key)
@@ -15,13 +12,17 @@ function handleKeyPress(key: string) {
 </script>
 
 <template>
-  <div class="keyboard-wrapper">
-    <div v-for="(row, rowIndex) in qwertyKeyboard" :key="rowIndex" class="keyboard-row">
+  <div class="keyboard-flex keyboard-wrapper w-full">
+    <div
+      v-for="(row, rowIndex) in qwertyKeyboard"
+      :key="rowIndex"
+      class="keyboard-flex keyboard-row max-w-full"
+    >
       <KeyButton
         v-for="key in row"
         :key="key"
         @click="handleKeyPress(key)"
-        class="keyboard-key"
+        class="w-[8%] lg:w-[5%] max-w-[4rem] h-12 font-semibold"
         :state="
           game.correctLetters.includes(key)
             ? 'success'
@@ -37,16 +38,17 @@ function handleKeyPress(key: string) {
 </template>
 
 <style scoped>
-.keyboard-wrapper {
+.keyboard-flex {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
 }
 
+.keyboard-wrapper {
+  flex-direction: column;
+}
+
 .keyboard-row {
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 }
 </style>

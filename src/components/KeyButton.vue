@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import {Button} from "@/components/ui/button"
+import {ref} from "vue"
 const props = defineProps<{
   state: 'default' | 'success' | 'error'
 }>()
+
+const windowWidth = ref(window.innerWidth)
 </script>
 <template>
-  <Button :class="`btn-${props.state}`">
+  <Button :class="`btn-${props.state}`" :size='windowWidth < 900 ? "sm" : "default"'>
     <slot />
   </Button>
 </template>

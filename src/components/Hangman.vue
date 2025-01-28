@@ -5,12 +5,12 @@ const game = useGameStore()
 </script>
 
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 200 250" style="width: 100%; height: 100%">
-    <rect width="200" height="250" fill="#4cbee3" x="0" y="0"/>
-    <rect width="200" height="100" fill="green" x="0" y="230"/>
-    <circle r="40" cy="230" cx="40" fill="green"/>
-    <circle r="60" cy="230" cx="90" fill="green"/>
-    <circle r="50" cy="230" cx="150" fill="green"/>
+  <svg xmlns="http://www.w3.org/2000/svg" width="200" height="250" viewBox="0 0 200 250" style="width: 100%; height: 100%">
+    <rect width="200" height="250" fill="#96bbda" x="0" y="0"/>
+    <rect width="200" height="100" fill="#81af56" x="0" y="230"/>
+    <circle r="40" cy="230" cx="40" fill="#81af56"/>
+    <circle r="60" cy="230" cx="90" fill="#81af56"/>
+    <circle r="50" cy="230" cx="150" fill="#81af56"/>
     <!-- Base -->
     <g v-if="game.wrongAttempts > 0">
       <polygon points="10,250 20,230 180,230 190,250 10,250" fill="#4D2600"/>

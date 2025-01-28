@@ -28,8 +28,8 @@ describe('HangmanComponent.vue', () => {
   });
 
   it('renders the base correctly', () => {
-    expect(wrapper.find('rect[fill="#4cbee3"]').exists()).toBe(true); // Sky
-    expect(wrapper.find('rect[fill="green"]').exists()).toBe(true);   // Ground
+    expect(wrapper.find('rect[fill="#96bbda"]').exists()).toBe(true); // Sky
+    expect(wrapper.find('rect[fill="#81af56"]').exists()).toBe(true);   // Ground
   });
 
   it('renders the base when wrongAttempts > 0', async () => {

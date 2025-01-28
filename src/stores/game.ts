@@ -1,9 +1,16 @@
 import { defineStore } from 'pinia'
 import type { Difficulty } from '@/types/difficulty.enum.ts'
-import { containsAllChars, switchDifficulty } from '@/lib/utils.ts'
+import {
+  containsAllChars,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  switchDifficulty,
+} from '@/lib/utils.ts'
+import type { Score } from '@/types/score.ts'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
+    nickname: '',
     word: '',
     wordMeaning: '',
     correctLetters: [] as string[],
@@ -11,10 +18,16 @@ export const useGameStore = defineStore('game', {
     wrongAttempts: 0,
     maxAttempts: 6,
     timer: 30,
+    remainingTime: 30,
     wordLength: 0,
+    jokerHint: 2,
+    jokerRemoveLetter: 2,
+    jokersUsed: 0,
     difficulty: 'easy' as Difficulty,
     isRunning: false,
     gameOver: false,
+    topScores: loadFromLocalStorage('scores') as Score[],
+    addedCurrentScore: false,
   }),
   actions: {
     setWord(newWord: string) {
@@ -28,6 +41,7 @@ export const useGameStore = defineStore('game', {
     },
     setTimer(newTimer: number) {
       this.timer = newTimer
+      this.remainingTime = newTimer
     },
     startTimer() {
       this.isRunning = true
@@ -69,6 +83,26 @@ export const useGameStore = defineStore('game', {
       this.wrongAttempts = 0
       this.gameOver = false
       this.isRunning = false
+      this.remainingTime = this.timer
+      this.addedCurrentScore = false
+      this.jokersUsed = 0
+      switchDifficulty(this.difficulty)
+    },
+    addScore(score: Score) {
+      if (this.addedCurrentScore) return
+      if (!this.topScores) {
+        this.topScores = []
+      }
+      this.topScores.push(score)
+      this.topScores.sort((a, b) => b.score - a.score)
+      if (this.topScores.length > 10) {
+        this.topScores.pop()
+      }
+      this.addedCurrentScore = true
+      saveToLocalStorage('scores', this.topScores)
+    },
+    calculateScore(timeTaken: number) {
+      return Math.round(1000 / (1 + timeTaken / this.timer) - (50 * this.jokersUsed) - (25 * this.wrongAttempts))
     },
   },
 })

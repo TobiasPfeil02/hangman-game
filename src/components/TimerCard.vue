@@ -27,6 +27,7 @@ const startTimer = () => {
     timerInterval.value = window.setInterval(() => {
       if (time.value > 0) {
         time.value--
+        gameStore.remainingTime = time.value
       } else {
         gameStore.triggerGameOver()
         resetTimer()
@@ -76,11 +77,8 @@ watch(
 </script>
 
 <template>
-  <div class="mx-auto my-0 w-1/5 h-16">
-    <Badge
-      class="w-full h-full text-center text-2xl justify-center"
-      :variant="time > 10 ? 'default' : 'destructive'"
-    >
+  <div>
+    <Badge class="text-2xl py-1 px-4" :variant="time > 10 ? 'default' : 'destructive'">
       {{ formattedTime }}
     </Badge>
   </div>
