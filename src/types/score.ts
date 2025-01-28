@@ -3,4 +3,5 @@ export type Score = {
   meaning: string;
   timeTaken: number;
   difficulty: string;
+  score: number;
 };

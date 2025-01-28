@@ -16,6 +16,7 @@ function handleClick() {
     const remainingLetters = wordArray.filter((element) => !game.correctLetters.includes(element))
     game.guessLetter(remainingLetters[Math.floor(Math.random() * remainingLetters.length)])
     game.jokerHint--
+    game.jokersUsed++
   }
   if (props.type === 'removeLetter') {
     const qwertyKeys = QWERTY.flat()
@@ -25,6 +26,7 @@ function handleClick() {
       remainingWrongLetters[Math.floor(Math.random() * remainingWrongLetters.length)],
     )
     game.jokerRemoveLetter--
+    game.jokersUsed++
   }
 }
 </script>
