@@ -9,18 +9,22 @@ const game = useGameStore()
 </script>
 
 <template>
-  <NavBar/>
-  <div class="flex flex-col items-center justify-center h-full gap-2">
+  <NavBar />
+  <div class="flex flex-col items-center justify-center gap-2 h-[90dvh] px-3">
     <h1 class="text-center font-bold text-4xl mb-2">Configure Game</h1>
     <h2>Choose a nickname:</h2>
-    <Input class="w-1/3" placeholder="HangmanProfi123" v-model="game.nickname" />
-    <h2>Select difficulty</h2>
-    <div>
+    <Input
+      class="w-full sm:w-1/2 md:w-2/6 lg:w-1/3"
+      placeholder="HangmanProfi123"
+      v-model="game.nickname"
+    />
+    <h2>Select difficulty:</h2>
+    <div class="flex flex-row gap-2">
       <Button
         v-for="difficulty in Object.values(Difficulty)"
         :key="difficulty"
         variant="outline"
-        class="mr-2 font-semibold hover:border-green-700"
+        class="font-semibold hover:border-green-700"
         :class="{
           'text-white hover:text-white  border-green-700 bg-green-700 hover:bg-green-700':
             game.difficulty == difficulty,
@@ -35,5 +39,3 @@ const game = useGameStore()
     </router-link>
   </div>
 </template>
-
-<style scoped></style>

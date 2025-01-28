@@ -54,7 +54,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative mt-4">
     <TimerCard :initial-time="game.timer" class="absolute left-1/2 translate-x-[-50%]" />
     <div class="h-[40vh] xl:h-[50vh] flex items-center">
       <Hangman />
