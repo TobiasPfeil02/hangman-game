@@ -7,7 +7,6 @@ import { useGameStore } from '@/stores/game.ts'
 import Hangman from '@/components/Hangman.vue'
 import TimerCard from '@/components/TimerCard.vue'
 import { containsAllChars } from '@/lib/utils.ts'
-import NavBar from '@/components/NavBar.vue'
 import type { Score } from '@/types/score'
 import JokerButton from '@/components/JokerButton.vue'
 
@@ -55,53 +54,55 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full flex flex-col items-center">
-    <NavBar :show-info="true" class="w-full absolute" />
-    <TimerCard :initial-time="game.timer" class="mt-20" />
-    <div class="h-[40vh] mt-4 flex items-center">
+  <div class="relative">
+    <TimerCard :initial-time="game.timer" class="absolute left-1/2 translate-x-[-50%]" />
+    <div class="h-[40vh] xl:h-[50vh] flex items-center">
       <Hangman />
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 absolute right-5">
         <JokerButton type="hint" :amount="game.jokerHint" />
         <JokerButton type="removeLetter" :amount="game.jokerRemoveLetter" />
       </div>
     </div>
-    <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10">
-      <h1 v-if="word">
-        <span v-for="(char, index) in word.split('')" v-bind:key="char + index" class="text-4xl">{{
-          game.correctLetters.includes(char) ? char : '_ '
-        }}</span>
-      </h1>
-      <KeyBoard class="max-w-full" />
+  </div>
+  <div v-if="!game.gameOver" class="w-full flex flex-col justify-center items-center gap-10 mt-4">
+    <h1 v-if="word" class="flex gap-0.5">
+      <span
+        v-for="(char, index) in word.split('')"
+        v-bind:key="char + index"
+        class="text-4xl w-9 text-center"
+        >{{ game.correctLetters.includes(char) ? char : '_' }}</span
+      >
+    </h1>
+    <KeyBoard />
+  </div>
+  <div v-else class="mt-8">
+    <div
+      v-if="guessedWordCorrectly(game.correctLetters, game.word)"
+      class="flex flex-col justify-center items-center gap-2"
+    >
+      <h2 class="text-2xl">Success</h2>
+      <p class="text-lg">You guessed the correct word: {{ game.word }} !</p>
+      <p v-if="game.wordMeaning !== 'Lacking a definition or value.'">
+        {{ game.word }} means {{ game.wordMeaning }}
+      </p>
+      <Button class="btn-primary" @click="resetGame()">Try Again</Button>
     </div>
-    <div v-else class="mt-4">
-      <div
-        v-if="guessedWordCorrectly(game.correctLetters, game.word)"
-        class="flex flex-col justify-center items-center gap-2"
-      >
-        <h2 class="text-2xl">Success</h2>
-        <p class="text-lg">You guessed the correct word: {{ game.word }} !</p>
-        <p v-if="game.wordMeaning !== 'Lacking a definition or value.'">
-          {{ game.word }} means {{ game.wordMeaning }}
-        </p>
-        <Button class="btn-primary" @click="resetGame()">Try Again</Button>
-      </div>
-      <div
-        v-else-if="game.wrongAttempts >= game.maxAttempts"
-        class="text-center flex flex-col justify-center items-center gap-2"
-      >
-        <h2 class="text-2xl">Game Over</h2>
-        <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
-        <p v-if="game.wordMeaning !== 'Lacking a definition or value.'" class="text-lg">
-          {{ game.word }} means {{ game.wordMeaning }}
-        </p>
-        <Button class="btn-primary" @click="resetGame()">Try Again</Button>
-      </div>
-      <div v-else class="text-center flex flex-col justify-center items-center gap-2">
-        <h2 class="text-2xl">Game Over</h2>
-        <p class="text-lg">You ran out of time!</p>
-        <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
-        <Button class="btn-primary" @click="resetGame()">Try Again</Button>
-      </div>
+    <div
+      v-else-if="game.wrongAttempts >= game.maxAttempts"
+      class="text-center flex flex-col justify-center items-center gap-2"
+    >
+      <h2 class="text-2xl">Game Over</h2>
+      <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
+      <p v-if="game.wordMeaning !== 'Lacking a definition or value.'" class="text-lg">
+        {{ game.word }} means {{ game.wordMeaning }}
+      </p>
+      <Button class="btn-primary" @click="resetGame()">Try Again</Button>
+    </div>
+    <div v-else class="text-center flex flex-col justify-center items-center gap-2">
+      <h2 class="text-2xl">Game Over</h2>
+      <p class="text-lg">You ran out of time!</p>
+      <p class="text-lg">The word we were looking for was: {{ game.word }}</p>
+      <Button class="btn-primary" @click="resetGame()">Try Again</Button>
     </div>
   </div>
 </template>
