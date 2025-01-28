@@ -35,6 +35,7 @@ function guessedWordCorrectly(array: string[], str: string) {
     const timeTaken = game.timer - game.remainingTime
 
     game.addScore({
+      nickname: game.nickname,
       word: game.word,
       meaning: game.wordMeaning,
       timeTaken: timeTaken,
