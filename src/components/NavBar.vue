@@ -3,6 +3,9 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useGameStore } from '@/stores/game.ts'
 
+const { showInfo = false } = defineProps<{
+  showInfo?: boolean
+}>()
 const game = useGameStore()
 </script>
 
@@ -12,8 +15,8 @@ const game = useGameStore()
       <Button>
         <router-link to="/">&lt; Home</router-link>
       </Button>
-      <div class="flex items-center justify-center gap-2">
-        <p>{{game.nickname}} playing a game on</p>
+      <div class="flex items-center justify-center gap-2" v-if="showInfo">
+        <p>{{ game.nickname }} playing a game on</p>
         <Badge>{{ game.difficulty }}</Badge>
       </div>
     </div>
