@@ -7,7 +7,8 @@ import NavBar from '@/components/NavBar.vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { useForm } from 'vee-validate'
-import { FormControl, FormLabel, FormField } from '@/components/ui/form'
+import { FormControl, FormLabel, FormField, FormItem } from '@/components/ui/form'
+import router from '@/router'
 
 const game = useGameStore()
 
@@ -22,7 +23,8 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
+  game.nickname = values.username
+  router.push({ path: '/game' })
 })
 </script>
 
@@ -36,11 +38,14 @@ const onSubmit = form.handleSubmit((values) => {
         name="username"
         class="w-full sm:w-1/2 md:w-2/6 lg:w-1/3"
       >
-        <FormLabel><h2>Choose a nickname:</h2></FormLabel>
-        <FormControl>
-          <Input placeholder="HangmanProfi123" v-model="game.nickname" v-bind="componentField" />
-        </FormControl>
+        <FormItem>
+          <FormLabel>Choose a nickname:</FormLabel>
+          <FormControl>
+            <Input placeholder="HangmanProfi123" v-model="game.nickname" v-bind="componentField" />
+          </FormControl>
+        </FormItem>
       </FormField>
+      <h2>Select difficulty:</h2>
       <div class="flex flex-row gap-2">
         <Button
           v-for="difficulty in Object.values(Difficulty)"
