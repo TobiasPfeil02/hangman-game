@@ -20,6 +20,10 @@ defineProps({
     type: String,
     required: true,
   },
+  score: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
@@ -39,6 +43,9 @@ defineProps({
     </div>
     <div class="flex items-center">
       <span class="font-bold mr-1">Difficulty:</span> <span>{{ difficulty }}</span>
+    </div>
+    <div class="flex items-center">
+      <span class="font-bold mr-1">Score:</span> <span>{{ score }}</span>
     </div>
   </div>
 </template>
