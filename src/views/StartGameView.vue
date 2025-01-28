@@ -3,11 +3,13 @@ import { Input } from '@/components/ui/input'
 import { Difficulty } from '@/types/difficulty.enum.ts'
 import { Button } from '@/components/ui/button'
 import { useGameStore } from '@/stores/game.ts'
+import NavBar from '@/components/NavBar.vue'
 
 const game = useGameStore()
 </script>
 
 <template>
+  <NavBar/>
   <div class="flex flex-col items-center justify-center h-full gap-2">
     <h1 class="text-center font-bold text-4xl mb-2">Configure Game</h1>
     <h2>Choose a nickname:</h2>
