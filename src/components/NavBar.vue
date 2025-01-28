@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useGameStore } from '@/stores/game.ts'
 
-const game = useGameStore();
+const game = useGameStore()
 </script>
 
 <template>
@@ -12,7 +12,10 @@ const game = useGameStore();
       <Button>
         <router-link to="/">&lt; Home</router-link>
       </Button>
-      <Badge>{{game.difficulty}}</Badge>
+      <div class="flex items-center justify-center gap-2">
+        <p>{{game.nickname}} playing a game on</p>
+        <Badge>{{ game.difficulty }}</Badge>
+      </div>
     </div>
   </nav>
 </template>

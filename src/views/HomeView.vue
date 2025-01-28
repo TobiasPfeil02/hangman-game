@@ -14,7 +14,7 @@ import hangman from "@/assets/hangman.svg"
 
     <nav class="flex flex-col gap-4">
       <Button>
-        <router-link to="/game" class="btn btn-primary">Start Game</router-link>
+        <router-link to="/start" class="btn btn-primary">Start Game</router-link>
       </Button>
       <SettingsDialog/>
       <Button>

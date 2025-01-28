@@ -10,6 +10,7 @@ import type { Score } from '@/types/score.ts'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
+    nickname: '',
     word: '',
     wordMeaning: '',
     correctLetters: [] as string[],
