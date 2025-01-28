@@ -76,6 +76,7 @@ function filterScores(difficulty: string) {
           :meaning="attempt.meaning"
           :timeTaken="`${attempt.timeTaken}s`"
           :difficulty="attempt.difficulty.toUpperCase()"
+          :score="attempt.score"
           class="w-full"
         />
       </div>

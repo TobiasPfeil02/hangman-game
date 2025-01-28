@@ -20,7 +20,11 @@ defineProps({
     type: String,
     required: true,
   },
-})
+  score: {
+    type: Number,
+    required: true,
+  },
+});
 </script>
 
 <template>
@@ -34,6 +38,7 @@ defineProps({
         'Meaning': meaning,
         'Time Taken': timeTaken,
         'Difficulty': difficulty,
+        'Score': score,
       }"
       :key="label"
     >

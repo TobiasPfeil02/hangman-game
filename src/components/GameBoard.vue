@@ -32,11 +32,14 @@ function resetGame() {
 
 function guessedWordCorrectly(array: string[], str: string) {
   if (containsAllChars(array, str)) {
+    const timeTaken = game.timer - game.remainingTime
+
     game.addScore({
       word: game.word,
       meaning: game.wordMeaning,
-      timeTaken: game.timer - game.remainingTime,
+      timeTaken: timeTaken,
       difficulty: game.difficulty,
+      score: game.calculateScore(timeTaken),
     } as Score)
 
     return true

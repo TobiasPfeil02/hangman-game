@@ -10,6 +10,7 @@ import type { Score } from '@/types/score.ts'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
+    nickname: '',
     word: '',
     wordMeaning: '',
     correctLetters: [] as string[],
@@ -21,6 +22,7 @@ export const useGameStore = defineStore('game', {
     wordLength: 0,
     jokerHint: 2,
     jokerRemoveLetter: 2,
+    jokersUsed: 0,
     difficulty: 'easy' as Difficulty,
     isRunning: false,
     gameOver: false,
@@ -83,6 +85,7 @@ export const useGameStore = defineStore('game', {
       this.isRunning = false
       this.remainingTime = this.timer
       this.addedCurrentScore = false
+      this.jokersUsed = 0
       switchDifficulty(this.difficulty)
     },
     addScore(score: Score) {
@@ -91,12 +94,15 @@ export const useGameStore = defineStore('game', {
         this.topScores = []
       }
       this.topScores.push(score)
-      this.topScores.sort((a, b) => a.timeTaken - b.timeTaken)
+      this.topScores.sort((a, b) => b.score - a.score)
       if (this.topScores.length > 10) {
         this.topScores.pop()
       }
       this.addedCurrentScore = true
       saveToLocalStorage('scores', this.topScores)
+    },
+    calculateScore(timeTaken: number) {
+      return Math.round(1000 / (1 + timeTaken / this.timer) - (50 * this.jokersUsed) - (25 * this.wrongAttempts))
     },
   },
 })
