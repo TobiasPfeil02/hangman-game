@@ -13,49 +13,35 @@ import {
 } from '@/components/ui/select'
 
 const selectedDifficulty = ref('all') // Default filter is 'all'
-const selectedNickname = ref('all') // Default filter is 'all'
+const selectedNickname = ref('All')
 const gameStore = useGameStore()
 
 const topScores = computed(() => gameStore.topScores)
 
-const filteredScores = computed(() => {
-  if (selectedDifficulty.value === 'all') {
-    return topScores.value
-  }
-  return topScores.value.filter(
-    (score: { difficulty: string }) => score.difficulty.toLowerCase() === selectedDifficulty.value,
-  )
-})
-
-const availableNicknames = Array.from(
-  new Set(
-    gameStore.topScores
-      .filter((score) => score.nickname != undefined)
-      .map((score) => score.nickname),
+const filteredScores = computed(() =>
+  topScores.value.filter(
+    ({ difficulty, nickname }) =>
+      (selectedDifficulty.value === 'all' ||
+        difficulty.toLowerCase() === selectedDifficulty.value.toLowerCase()) &&
+      (selectedNickname.value === 'All' ||
+        (nickname && nickname.toLowerCase() === selectedNickname.value.toLowerCase())),
   ),
 )
 
-function filterScoresByDifficulty(difficulty: string) {
-  selectedDifficulty.value = difficulty
-}
+const availableNicknames = computed(() =>
+  Array.from(new Set(topScores.value.map(({ nickname }) => nickname).filter(Boolean))),
+)
 
-function filterScoresByNickname(username: string) {
-  console.log(availableNicknames)
-  console.log(username)
-  selectedNickname.value = username
-}
+const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.value = difficulty)
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col items-center h-[100dvh]">
-    <!-- NavBar -->
     <NavBar class="w-full" />
 
-    <!-- Content -->
     <div class="mt-2 px-6 py-3 bg-white shadow-lg rounded-lg w-full">
       <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Scoreboard</h1>
 
-      <!-- Filter Buttons -->
       <div class="flex flex-col justify-between gap-4 mb-6 w-full">
         <div class="flex justify-between">
           <Button
@@ -68,23 +54,24 @@ function filterScoresByNickname(username: string) {
             {{ difficulty.toUpperCase() }}
           </Button>
         </div>
-        <Select @change="filterScoresByNickname">
-          <SelectTrigger :disabled="availableNicknames.length === 0">
-            <SelectValue placeholder="Nickname">{{ selectedNickname }}</SelectValue>
+
+        <Select v-model="selectedNickname">
+          <SelectTrigger :disabled="!availableNicknames.length">
+            <SelectValue>{{ selectedNickname }}</SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectLabel>Nickname</SelectLabel>
             <SelectItem
-              v-for="(nickname, index) in availableNicknames"
-              :key="index"
+              v-for="nickname in ['All', ...availableNicknames]"
+              :key="nickname"
               :value="nickname"
-              >{{ nickname }}
+            >
+              {{ nickname }}
             </SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      <!-- Scoreboard -->
       <div v-if="filteredScores?.length" class="space-y-4 h-[60dvh] overflow-scroll">
         <ScoreCard
           v-for="(attempt, index) in filteredScores"
