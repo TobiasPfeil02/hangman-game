@@ -22,14 +22,15 @@ const game = useGameStore()
       <DialogHeader>
         <DialogTitle class="mb-2 font-bold">Settings</DialogTitle>
         <h4>Select Difficulty:</h4>
-        <div>
+        <div class="flex flex-row justify-start gap-2">
           <Button
             v-for="difficulty in Object.values(Difficulty)"
             :key="difficulty"
             variant="outline"
-            class="mr-2 font-semibold hover:border-green-700"
+            class="font-semibold hover:border-green-700"
             :class="{
-              'text-white hover:text-white  border-green-700 bg-green-700 hover:bg-green-700': game.difficulty == difficulty,
+              'text-white hover:text-white  border-green-700 bg-green-700 hover:bg-green-700':
+                game.difficulty == difficulty,
             }"
             @click="game.setDifficulty(difficulty)"
           >
@@ -40,5 +41,3 @@ const game = useGameStore()
     </DialogContent>
   </Dialog>
 </template>
-
-<style scoped></style>
