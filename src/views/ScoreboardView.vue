@@ -92,8 +92,11 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
 
       <p v-else class="text-center text-gray-500">No attempts yet. Play a game to add scores!</p>
     </div>
-    <div v-else class="mt-2 px-6 py-3 w-full flex flex-col items-center justify-center gap-2">
-      <h2>You haven't played a game yet!</h2>
+    <div
+      v-else
+      class="mt-2 px-6 py-3 w-full h-[80dvh] flex flex-col items-center justify-center gap-4"
+    >
+      <h1 class="text-4xl">You haven't played a game yet!</h1>
       <Button>
         <router-link to="/start" class="btn btn-secondary">Play game</router-link>
       </Button>
