@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, type ComputedRef, ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import ScoreCard from '@/components/ScoreCard.vue'
 import { useGameStore } from '@/stores/game'
@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import ScoreTable from '@/components/ScoreTable.vue'
 
 const selectedDifficulty = ref('all') // Default filter is 'all'
 const selectedNickname = ref('All')
@@ -18,7 +19,16 @@ const gameStore = useGameStore()
 
 const topScores = computed(() => gameStore.topScores)
 
-const filteredScores = computed(() =>
+const filteredScores: ComputedRef<
+  {
+    score: number
+    nickname: string
+    difficulty: string
+    timeTaken: number
+    word: string
+    meaning: string
+  }[]
+> = computed(() =>
   topScores.value.filter(
     ({ difficulty, nickname }) =>
       (selectedDifficulty.value === 'all' ||
@@ -73,19 +83,23 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
           </Select>
         </div>
 
-        <div v-if="filteredScores?.length" class="space-y-4 h-[60dvh] overflow-y-auto">
-          <ScoreCard
-            v-for="(attempt, index) in filteredScores"
-            :key="index"
-            :nickname="attempt.nickname"
-            :position="index + 1"
-            :word="attempt.word"
-            :meaning="attempt.meaning"
-            :timeTaken="`${attempt.timeTaken}s`"
-            :difficulty="attempt.difficulty.toUpperCase()"
-            :score="attempt.score"
-            class="w-full"
-          />
+        <div v-if="filteredScores?.length" class="h-[60dvh] overflow-y-auto">
+          <div class="hidden md:block">
+            <ScoreTable :filtered-scores="filteredScores" />
+          </div>
+          <div class="w-full lg:hidden space-y-4">
+            <ScoreCard
+              v-for="(attempt, index) in filteredScores"
+              :key="index"
+              :nickname="attempt.nickname"
+              :position="index + 1"
+              :word="attempt.word"
+              :meaning="attempt.meaning"
+              :timeTaken="`${attempt.timeTaken}s`"
+              :difficulty="attempt.difficulty.toUpperCase()"
+              :score="attempt.score"
+            />
+          </div>
         </div>
 
         <p v-else class="text-center text-gray-500">No attempts yet. Play a game to add scores!</p>
