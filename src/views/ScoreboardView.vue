@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, type ComputedRef, ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import ScoreCard from '@/components/ScoreCard.vue'
 import { useGameStore } from '@/stores/game'
@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import ScoreTable from '@/components/ScoreTable.vue'
 
 const selectedDifficulty = ref('all') // Default filter is 'all'
 const selectedNickname = ref('All')
@@ -18,7 +19,16 @@ const gameStore = useGameStore()
 
 const topScores = computed(() => gameStore.topScores)
 
-const filteredScores = computed(() =>
+const filteredScores: ComputedRef<
+  {
+    score: number
+    nickname: string
+    difficulty: string
+    timeTaken: number
+    word: string
+    meaning: string
+  }[]
+> = computed(() =>
   topScores.value.filter(
     ({ difficulty, nickname }) =>
       (selectedDifficulty.value === 'all' ||
@@ -43,6 +53,7 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
       <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Scoreboard</h1>
 
       <div v-if="topScores && topScores.length > 0">
+        <!-- interaction for difficulty and nickname -->
         <div class="flex flex-col sm:flex-row justify-start gap-4 mb-6 w-full">
           <div class="flex justify-between gap-4">
             <Button
@@ -73,23 +84,34 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
           </Select>
         </div>
 
-        <div v-if="filteredScores?.length" class="space-y-4 h-[60dvh] overflow-y-auto">
-          <ScoreCard
-            v-for="(attempt, index) in filteredScores"
-            :key="index"
-            :nickname="attempt.nickname"
-            :position="index + 1"
-            :word="attempt.word"
-            :meaning="attempt.meaning"
-            :timeTaken="`${attempt.timeTaken}s`"
-            :difficulty="attempt.difficulty.toUpperCase()"
-            :score="attempt.score"
-            class="w-full"
-          />
+        <!-- score data -->
+        <div v-if="filteredScores?.length" class="h-[100%] overflow-y-auto">
+          <!-- display for desktop -->
+          <div class="hidden md:block">
+            <ScoreTable :filtered-scores="filteredScores" />
+          </div>
+
+          <!-- display for mobile -->
+          <div class="w-full md:hidden space-y-4">
+            <ScoreCard
+              v-for="(attempt, index) in filteredScores"
+              :key="index"
+              :nickname="attempt.nickname"
+              :position="index + 1"
+              :word="attempt.word"
+              :meaning="attempt.meaning"
+              :timeTaken="`${attempt.timeTaken}s`"
+              :difficulty="attempt.difficulty"
+              :score="attempt.score"
+            />
+          </div>
         </div>
 
+        <!-- no score data for filter -->
         <p v-else class="text-center text-gray-500">No attempts yet. Play a game to add scores!</p>
       </div>
+
+      <!-- no scores available -->
       <div
         v-else
         class="mt-2 px-6 py-3 w-full h-[80dvh] flex flex-col items-center justify-center gap-4"
