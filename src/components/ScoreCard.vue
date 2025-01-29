@@ -1,5 +1,9 @@
 <script setup lang="ts">
 defineProps({
+  nickname: {
+    type: String,
+    required: true,
+  },
   position: {
     type: Number,
     required: true,
@@ -34,11 +38,12 @@ defineProps({
     <div
       v-for="(value, label) in {
         '#': position,
+        'Score': score,
+        'Nickname': nickname,
+        'Difficulty': difficulty,
+        'Time Taken': timeTaken,
         'Word': word,
         'Meaning': meaning,
-        'Time Taken': timeTaken,
-        'Difficulty': difficulty,
-        'Score': score,
       }"
       :key="label"
     >
