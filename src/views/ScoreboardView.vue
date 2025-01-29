@@ -45,8 +45,8 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
     >
       <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Scoreboard</h1>
 
-      <div class="flex flex-col justify-between gap-4 mb-6 w-full">
-        <div class="flex justify-between">
+      <div class="flex flex-col sm:flex-row justify-start gap-4 mb-6 w-full">
+        <div class="flex justify-between gap-4">
           <Button
             v-for="difficulty in ['all', 'easy', 'medium', 'hard']"
             :key="difficulty"
@@ -59,7 +59,7 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
         </div>
 
         <Select v-model="selectedNickname">
-          <SelectTrigger :disabled="!availableNicknames.length">
+          <SelectTrigger :disabled="!availableNicknames.length" class="sm:max-w-[300px]">
             <SelectValue>{{ selectedNickname }}</SelectValue>
           </SelectTrigger>
           <SelectContent>
@@ -96,7 +96,7 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
       v-else
       class="mt-2 px-6 py-3 w-full h-[80dvh] flex flex-col items-center justify-center gap-4"
     >
-      <h1 class="text-4xl">You haven't played a game yet!</h1>
+      <h1 class="text-4xl text-center">You haven't played a game yet!</h1>
       <Button>
         <router-link to="/start" class="btn btn-secondary">Play game</router-link>
       </Button>
