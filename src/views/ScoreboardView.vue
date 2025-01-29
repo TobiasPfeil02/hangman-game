@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import NavBar from '@/components/NavBar.vue'
 import ScoreCard from '@/components/ScoreCard.vue'
 import { useGameStore } from '@/stores/game'
@@ -39,7 +39,10 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
   <div class="min-h-screen flex flex-col items-center h-[100dvh]">
     <NavBar class="w-full" />
 
-    <div class="mt-2 px-6 py-3 bg-white shadow-lg rounded-lg w-full">
+    <div
+      v-if="topScores && topScores.length > 0"
+      class="mt-2 px-6 py-3 bg-white shadow-lg rounded-lg w-full"
+    >
       <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Scoreboard</h1>
 
       <div class="flex flex-col justify-between gap-4 mb-6 w-full">
@@ -88,6 +91,12 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
       </div>
 
       <p v-else class="text-center text-gray-500">No attempts yet. Play a game to add scores!</p>
+    </div>
+    <div v-else class="mt-2 px-6 py-3 w-full flex flex-col items-center justify-center gap-2">
+      <h2>You haven't played a game yet!</h2>
+      <Button>
+        <router-link to="/start" class="btn btn-secondary">Play game</router-link>
+      </Button>
     </div>
   </div>
 </template>
