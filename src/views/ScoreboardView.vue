@@ -53,6 +53,7 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
       <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Scoreboard</h1>
 
       <div v-if="topScores && topScores.length > 0">
+        <!-- interaction for difficulty and nickname -->
         <div class="flex flex-col sm:flex-row justify-start gap-4 mb-6 w-full">
           <div class="flex justify-between gap-4">
             <Button
@@ -83,11 +84,15 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
           </Select>
         </div>
 
-        <div v-if="filteredScores?.length" class="h-[60dvh] overflow-y-auto">
+        <!-- score data -->
+        <div v-if="filteredScores?.length" class="h-[100%] overflow-y-auto">
+          <!-- display for desktop -->
           <div class="hidden md:block">
             <ScoreTable :filtered-scores="filteredScores" />
           </div>
-          <div class="w-full lg:hidden space-y-4">
+
+          <!-- display for mobile -->
+          <div class="w-full md:hidden space-y-4">
             <ScoreCard
               v-for="(attempt, index) in filteredScores"
               :key="index"
@@ -96,14 +101,17 @@ const filterScoresByDifficulty = (difficulty: string) => (selectedDifficulty.val
               :word="attempt.word"
               :meaning="attempt.meaning"
               :timeTaken="`${attempt.timeTaken}s`"
-              :difficulty="attempt.difficulty.toUpperCase()"
+              :difficulty="attempt.difficulty"
               :score="attempt.score"
             />
           </div>
         </div>
 
+        <!-- no score data for filter -->
         <p v-else class="text-center text-gray-500">No attempts yet. Play a game to add scores!</p>
       </div>
+
+      <!-- no scores available -->
       <div
         v-else
         class="mt-2 px-6 py-3 w-full h-[80dvh] flex flex-col items-center justify-center gap-4"
