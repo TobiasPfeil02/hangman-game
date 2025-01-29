@@ -28,27 +28,24 @@ defineProps({
     type: Number,
     required: true,
   },
-});
+})
 </script>
 
 <template>
-  <div
-    class="score-card flex flex-col lg:flex-row items-center gap-1 lg:gap-4 p-4 border border-gray-300 rounded-lg shadow-md mx-auto"
-  >
-    <div
+  <div class="score-card flex flex-col gap-1 p-4 border border-gray-200 rounded-lg mx-auto">
+    <span>#{{ position }}</span>
+    <p
       v-for="(value, label) in {
-        '#': position,
-        'Score': score,
-        'Nickname': nickname,
-        'Difficulty': difficulty,
-        'Time Taken': timeTaken,
-        'Word': word,
-        'Meaning': meaning,
+        Score: score,
+        Nickname: nickname,
+        Difficulty: difficulty,
+        'Time taken': timeTaken,
+        Word: word,
+        Meaning: meaning,
       }"
       :key="label"
     >
-      <span class="font-bold mr-1">{{ label }}:</span>
-      <span>{{ value }}</span>
-    </div>
+      <span class="font-medium text-sm mr-1 text-gray-500">{{ label }}:</span> {{ value }}
+    </p>
   </div>
 </template>
