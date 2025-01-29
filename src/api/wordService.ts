@@ -2,9 +2,9 @@ import axios from 'axios'
 
 export async function fetchWord(length?: number): Promise<string> {
   let API_URL = `https://random-word-api.herokuapp.com/word`
-  if (length !== 0 && length !== undefined) API_URL += `?${length}`
+  if (length !== 0 && length !== undefined) API_URL += `?length=${length}`
   const response = await axios.get(API_URL)
-  return 'test'.toUpperCase() //response.data[0].toUpperCase()
+  return response.data[0].toUpperCase()
 }
 
 export async function fetchWordMeaning(word: string) {

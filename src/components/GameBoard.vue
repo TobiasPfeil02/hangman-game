@@ -14,7 +14,7 @@ const word = ref()
 const game = useGameStore()
 
 function initWord() {
-  fetchWord().then((res) => {
+  fetchWord(game.wordLength).then((res) => {
     word.value = res
     game.setWord(word.value)
     game.startTimer()
