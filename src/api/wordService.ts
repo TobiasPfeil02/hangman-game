@@ -8,11 +8,8 @@ export async function fetchWord(length: number = 5): Promise<string> {
 
   // Randomly select a word from the list
   const randomIndex = Math.floor(Math.random() * response.data.length)
-  console.log(response.data[randomIndex].word)
   return response.data[randomIndex].word.toUpperCase()
 }
-
-
 
 export async function fetchWordMeaning(word: string) {
   const API_URL = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
