@@ -1,11 +1,18 @@
 import axios from 'axios'
 
-export async function fetchWord(length?: number): Promise<string> {
-  let API_URL = `https://random-word-api.herokuapp.com/word`
-  if (length !== 0 && length !== undefined) API_URL += `?length=${length}`
+export async function fetchWord(length: number = 5): Promise<string> {
+  const API_URL = `https://api.datamuse.com/words?sp=${'?'.repeat(length)}&max=50`
   const response = await axios.get(API_URL)
-  return response.data[0].toUpperCase()
+
+  if (response.data.length === 0) throw new Error("No words found")
+
+  // Randomly select a word from the list
+  const randomIndex = Math.floor(Math.random() * response.data.length)
+  console.log(response.data[randomIndex].word)
+  return response.data[randomIndex].word.toUpperCase()
 }
+
+
 
 export async function fetchWordMeaning(word: string) {
   const API_URL = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`

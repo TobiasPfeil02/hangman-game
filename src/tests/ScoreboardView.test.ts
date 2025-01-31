@@ -76,7 +76,7 @@ describe('ScoreboardView.vue', () => {
       word: 'TEST',
       meaning: 'A procedure to establish a result',
       timeTaken: '90s',
-      difficulty: 'EASY',
+      difficulty: 'easy',
       score: 100,
     })
   })
@@ -93,7 +93,7 @@ describe('ScoreboardView.vue', () => {
       word: 'GAME',
       meaning: 'An activity for amusement',
       timeTaken: '130s',
-      difficulty: 'MEDIUM',
+      difficulty: 'medium',
       score: 80,
     })
   })
@@ -110,7 +110,7 @@ describe('ScoreboardView.vue', () => {
       word: 'HARD',
       meaning: 'Difficult',
       timeTaken: '200s',
-      difficulty: 'HARD',
+      difficulty: 'hard',
       score: 60,
     })
   })
@@ -125,7 +125,7 @@ describe('ScoreboardView.vue', () => {
       word: 'TEST',
       meaning: 'A procedure to establish a result',
       timeTaken: '90s',
-      difficulty: 'EASY',
+      difficulty: 'easy',
       score: 100,
     })
 
@@ -135,7 +135,7 @@ describe('ScoreboardView.vue', () => {
       word: 'GAME',
       meaning: 'An activity for amusement',
       timeTaken: '130s',
-      difficulty: 'MEDIUM',
+      difficulty: 'medium',
       score: 80,
     })
 
@@ -144,7 +144,7 @@ describe('ScoreboardView.vue', () => {
       word: 'HARD',
       meaning: 'Difficult',
       timeTaken: '200s',
-      difficulty: 'HARD',
+      difficulty: 'hard',
       score: 60,
     })
   })
@@ -153,6 +153,6 @@ describe('ScoreboardView.vue', () => {
     gameStore.topScores = []
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.text()).toContain('No attempts yet. Play a game to add scores!')
+    expect(wrapper.text()).toContain('You haven\'t played a game yet!')
   })
 })
