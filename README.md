@@ -12,6 +12,7 @@ An interactive Hangman game built using **Vue 3**, **TypeScript**, **Pinia**, **
 ## 🌐 URL to Live Application
 The live application is hosted at: https://hangman.t-pfeil.com/
 
+There is currently a bug with the vercel deployment, when reloading in 'https://hangman.t-pfeil.com/scoreboard', '.../start' or '.../game' a 404 error occures.
 ---
 
 ## 🛠️ Local Development Setup
